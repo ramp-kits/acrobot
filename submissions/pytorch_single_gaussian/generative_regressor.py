@@ -9,6 +9,11 @@ import torch.nn as nn
 num_epochs = 30
 batch = 50
 
+# In this kit, we use a pytorch simple regressor to estimate the mu of a
+# gaussian, and we estimate the sigma over the training set
+# additionnaly, we use a uniform distribution that
+# covers the rest of the space (avoiding to have the likelihood drop to 0
+# in the case where no distribution covers the true value)
 
 def train_model(model, dataset, optimizer, n_epochs=10, batch_size=128,
                 loss_fn=nn.MSELoss()):
@@ -73,6 +78,8 @@ class GenerativeRegressor(BaseEstimator):
         self.model.eval()
         X = torch.Tensor(X)
 
+        # We run our model over the whole training data to get an estimate
+        # of sigma
         num_data = X.shape[0]
         num_batches = int(num_data / batch) + 1
         yGuess = []
@@ -110,6 +117,9 @@ class GenerativeRegressor(BaseEstimator):
         params_normal = np.concatenate((preds, sigmas), axis=1)
 
         # The first generative regressor is gaussian, the second is uniform
+        # For the whole list of distributions, run
+        #   import rampwf as rw
+        #   rw.utils.distributions_dict
         types = np.array([[0, 1], ] * len(X))
 
         # Uniform
@@ -121,6 +131,10 @@ class GenerativeRegressor(BaseEstimator):
         weights = np.array([[0.999, 0.001], ] * len(X))
 
         # We concatenate the params
+        # To get information about the parameters of the distribution you are
+        # using, you can run
+        #   import rampwf as rw
+        #   [(v,v.params) for v in rw.utils.distributions_dict.values()]
         params = np.concatenate((params_normal, params_uniform), axis=1)
         return weights, types, params
 

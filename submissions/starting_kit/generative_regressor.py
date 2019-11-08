@@ -22,6 +22,9 @@ class GenerativeRegressor(BaseEstimator):
 
     def predict(self, X):
         # The first generative regressor is gaussian, the second is beta
+        # For the whole list of distributions, run
+        #   import rampwf as rw
+        #   rw.utils.distributions_dict
         types = np.array([[0, 2], ] * len(X))
 
         # Normal
@@ -30,7 +33,8 @@ class GenerativeRegressor(BaseEstimator):
         sigmas = sigmas[:, np.newaxis]
         params_normal = np.concatenate((preds, sigmas), axis=1)
 
-        # Beta
+        # Dumb example of usage of Beta distribution
+        # https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html
         padding = 2
         a_array = np.array([6] * len(X))
         b_array = np.array([7] * len(X))
@@ -43,5 +47,9 @@ class GenerativeRegressor(BaseEstimator):
         weights = np.array([[0.6, 0.4], ] * len(X))
 
         # We concatenate the params
+        # To get information about the parameters of the distribution you are
+        # using, you can run
+        #   import rampwf as rw
+        #   [(v,v.params) for v in rw.utils.distributions_dict.values()]
         params = np.concatenate((params_normal, params_beta), axis=1)
         return weights, types, params

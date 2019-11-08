@@ -8,6 +8,12 @@ class FeatureExtractor():
         pass
 
     def transform(self, X_df_raw):
+        """
+        :param X_df_raw: The initial dataframe
+        :return: a dataframe with additional features (with no clashing names)
+                 bqsed on previous values' mean, being mindfull about restarts
+        """
+
         X_df = X_df_raw.to_dataframe()
 
         restart = X_df[self.restart_name].values

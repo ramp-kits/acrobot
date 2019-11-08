@@ -6,6 +6,8 @@ from sklearn.preprocessing import KBinsDiscretizer
 np.random.seed(7)
 EPSILON = 1e-10
 
+# This kit will create a sort of discretized distribution, by using
+# non overlapping uniform distribution
 
 class GenerativeRegressor(BaseEstimator):
     def __init__(self, max_dists, current_dim):
@@ -20,6 +22,11 @@ class GenerativeRegressor(BaseEstimator):
         self.clf.fit(X, y.ravel())
 
     def predict(self, X):
+
+        # Only uniform distributions
+        # For the whole list of distributions, run
+        #   import rampwf as rw
+        #   rw.utils.distributions_dict
         types = np.ones((len(X), self.nb_bins))
 
         preds_proba = self.clf.predict_proba(X)
@@ -38,6 +45,10 @@ class GenerativeRegressor(BaseEstimator):
         weights += EPSILON
         weights /= np.sum(weights, axis=1)[:, None]
 
+        # To get information about the parameters of the distribution you are
+        # using, you can run
+        #   import rampwf as rw
+        #   [(v,v.params) for v in rw.utils.distributions_dict.values()]
         params_uniform = np.empty((len(X), self.nb_bins * 2))
         params_uniform[:, 0::2] = a_array
         params_uniform[:, 1::2] = b_array

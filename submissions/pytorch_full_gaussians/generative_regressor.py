@@ -11,6 +11,11 @@ BATCH = 50
 NB_GAUSSIANS = 2
 EPSILON = 1e-12
 
+# In this submission, we try to estimate the true distribution by using
+# NB_GAUSSIANS gaussian distributions, with mu and sigma's estimated
+# from a pytorch model, and an additional uniform distribution that
+# covers the rest of the space (avoiding to have the likelihood drop to 0
+# in the case where no distribution covers the true value)
 
 def loglk(x, mean, sd):
     var = torch.mul(sd, sd)
@@ -20,7 +25,8 @@ def loglk(x, mean, sd):
     probs = num / denom
     return probs
 
-
+# Custom pytorch loss, giving an approximate of the log likelihood
+# when made of gaussians
 class CustomLoss:
     def __init__(self, weights):
         self.weights = torch.Tensor(weights[1:])
@@ -150,9 +156,16 @@ class GenerativeRegressor(BaseEstimator):
         params_uniform = np.stack((a_array, b_array), axis=1)
 
         # We concatenate the params
+        # To get information about the parameters of the distribution you are
+        # using, you can run
+        #   import rampwf as rw
+        #   [(v,v.params) for v in rw.utils.distributions_dict.values()]
         params = np.concatenate((params_uniform, params_normal), axis=1)
 
         # The first generative regressors is uniform, the others are gaussians
+        # For the whole list of distributions, run
+        #   import rampwf as rw
+        #   rw.utils.distributions_dict
         types = np.zeros(NB_GAUSSIANS + 1)
         types[0] = 1
         types = np.array([types] * len(X))
