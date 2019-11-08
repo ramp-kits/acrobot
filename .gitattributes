@@ -1,0 +1,8 @@
+submissions/pytorch_full_gaussians/models/ filter=lfs diff=lfs merge=lfs -text
+submissions/pytorch_full_gaussians/models/best_model/ filter=lfs diff=lfs merge=lfs -text
+submissions/pytorch_full_gaussians/models/best_model/* filter=lfs diff=lfs merge=lfs -text
+submissions/pytorch_full_gaussians/models/best_model/** filter=lfs diff=lfs merge=lfs -text
+submissions/pytorch_full_gaussians/models/best_model/model_1_fold_1.name.tch filter=lfs diff=lfs merge=lfs -text
+submissions/pytorch_full_gaussians/models/best_model/model_1_fold_1. filter=lfs diff=lfs merge=lfs -text
+submissions/pytorch_full_gaussians/models/best_model/model_1_fold_1.py.tch filter=lfs diff=lfs merge=lfs -text
+submissions/pytorch_full_gaussians/models/best_model/model_1_fold_1.params.tch filter=lfs diff=lfs merge=lfs -text
