@@ -14,6 +14,8 @@ _target_column_observation_names = [
     'thetaDot1', 'cos(theta1)', 'sin(theta1)', 
 ]
 _target_column_action_names = ['action']
+_restart_names = ['restart']
+
 Predictions = rw.prediction_types.make_generative_regression(
     _max_dists, label_names=_target_column_observation_names)
 
@@ -28,7 +30,7 @@ workflow = rw.workflows.TSFEGenReg(
     check_sizes=[137], check_indexs=[13], max_dists=_max_dists,
     target_column_observation_names=_target_column_observation_names,
     target_column_action_names=_target_column_action_names,
-    restart_names=['restart'],
+    restart_names=_restart_names,
     timestamp_name='time',
 )
 
@@ -45,8 +47,8 @@ def _read_data(path, X_name=None):
     X_df = pd.read_pickle(os.path.join(path, 'data', X_name))
     # reorder columns according to _target_column_observation_names
     X_df = X_df.reindex(
-        columns=_target_column_observation_names+
-        _target_column_action_names+['restart'])
+        columns=_target_column_observation_names +
+        _target_column_action_names + _restart_names)
     # Target for observation
     y_df = X_df[_target_column_observation_names][1:]
     y_df.reset_index(drop=True, inplace=True)
