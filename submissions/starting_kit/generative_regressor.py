@@ -25,7 +25,8 @@ class GenerativeRegressor(BaseEstimator):
         # For the whole list of distributions, run
         #   import rampwf as rw
         #   rw.utils.distributions_dict
-        types = np.array([[0, 2], ] * len(X))
+#        types = np.array([[0, 2], ] * len(X))
+        types = np.array([[0], ] * len(X))
 
         # Normal
         preds = self.reg.predict(X)
@@ -35,21 +36,23 @@ class GenerativeRegressor(BaseEstimator):
 
         # Dumb example of usage of Beta distribution
         # https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html
-        padding = 2
-        a_array = np.array([6] * len(X))
-        b_array = np.array([7] * len(X))
-        loc_array = np.array([self.loc - padding] * len(X))
-        scale_array = np.array([self.max-self.loc + 2 * padding] * len(X))
-        params_beta = np.stack(
-            (a_array, b_array, loc_array, scale_array), axis=1)
+#        padding = 2
+#        a_array = np.array([6] * len(X))
+#        b_array = np.array([7] * len(X))
+#        loc_array = np.array([self.loc - padding] * len(X))
+#        scale_array = np.array([self.max - self.loc + 2 * padding] * len(X))
+#        params_beta = np.stack(
+#            (a_array, b_array, loc_array, scale_array), axis=1)
 
         # We give more weight to the gaussian one
-        weights = np.array([[0.6, 0.4], ] * len(X))
+#        weights = np.array([[0.6, 0.4], ] * len(X))
+        weights = np.array([[1.0], ] * len(X))
 
         # We concatenate the params
         # To get information about the parameters of the distribution you are
         # using, you can run
         #   import rampwf as rw
         #   [(v,v.params) for v in rw.utils.distributions_dict.values()]
-        params = np.concatenate((params_normal, params_beta), axis=1)
+#        params = np.concatenate((params_normal, params_beta), axis=1)
+        params = params_normal
         return weights, types, params
