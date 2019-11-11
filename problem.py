@@ -8,7 +8,7 @@ from sklearn.model_selection import KFold
 
 problem_title = 'Acrobot simulator'
 _n_burn_in = 0  # number of guaranteed steps in time series history
-_max_dists = 300  # max number of kernels to use in generative regressors
+_max_dists = 100  # max number of kernels to use in generative regressors
 _target_column_observation_names = [
     'thetaDot2', 'cos(theta1)', 'sin(theta1)',
     'cos(theta2)', 'sin(theta2)', 'thetaDot1',
