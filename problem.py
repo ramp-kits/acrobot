@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import KFold
 
-problem_title = 'Acrobot simulator'
+problem_title = 'Acrobot system identification'
 _n_burn_in = 0  # number of guaranteed steps in time series history
 _max_dists = 100  # max number of kernels to use in generative regressors
 _target_column_observation_names = [
