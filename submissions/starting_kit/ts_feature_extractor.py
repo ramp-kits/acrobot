@@ -1,4 +1,3 @@
-
 class FeatureExtractor():
     def __init__(self, restart_name):
         """
@@ -10,13 +9,10 @@ class FeatureExtractor():
         self.restart_name = restart_name
 
     def transform(self, X_ds):
-        """Transform time series into list od states.
-
+        """Transform time series into list of states.
         We simply use the observables at time t as the state.
-
-        Be careful not tu use any information from the future (X_ds[t + 1:])
+        Be careful not to use any information from the future (X_ds[t + 1:])
         when constructing X_df[t].
-
         Parameters
         ----------
         X_ds : xarray.Dataset
