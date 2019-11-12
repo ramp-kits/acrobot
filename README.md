@@ -24,7 +24,7 @@ An alternative solution is to clone the [ramp-workflow repository](https://githu
 ```
 git clone https://github.com/paris-saclay-cds/ramp-workflow.git
 ```
-You can use SSH instead of HTTPS.
+(you can use SSH instead of HTTPS).
 
 Then `cd` to the `ramp-workflow` folder and run
 ```
@@ -38,4 +38,6 @@ To get the starting kit with the notebook and the submission examples clone the 
 ```git clone https://github.com/ramp-kits/acrobot```.
 
 To run the notebook, `cd` to the `acrobot` folder and run
-```jupyter notebook acrobot_starting_kit.ipynb```.
+```
+jupyter notebook acrobot_starting_kit.ipynb
+```.
