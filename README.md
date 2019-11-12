@@ -1,4 +1,4 @@
-# RAMP starting kit on the Acrobot dataset
+# RAMP starting kit for the Acrobot challenge
 
 ## Getting started
 
