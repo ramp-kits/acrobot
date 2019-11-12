@@ -15,7 +15,9 @@ class FeatureExtractor():
 
     def transform(self, X_df_raw):
         """Transform time series into list of states.
-        We simply use the observables at time t as the state.
+        We use the observables at time t as the state, concatenated to the mean 
+        of the last ten time steps, handling restarts.
+        
         Be careful not to use any information from the future (X_ds[t + 1:])
         when constructing X_df[t].
         Parameters
