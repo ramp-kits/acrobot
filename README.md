@@ -9,11 +9,12 @@ The starting kit requires Python 3.7 and the following packages:
 - scikit-learn
 - pandas
 - xarray
-- altair
 - jupyter
+- pytorch
+- altair
 - ramp-workflow (see below to install this package as you will need a specific version)
 
-Python 3.7 and most of these packages can be installed using [Anaconda](https://www.anaconda.com/distribution/).
+Python 3.7 and all these packages (except [altair](https://altair-viz.github.io/getting_started/installation.html) and ramp-workflow) can be easily installed using the [Anaconda distribution](https://www.anaconda.com/distribution/).
 
 
 ### ramp-workflow installation
