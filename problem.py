@@ -54,19 +54,19 @@ def _read_data(path, X_name=None):
     y_df.reset_index(drop=True, inplace=True)
 
     # a(t) is shifted by one in data
-    a_df = X_df[_target_column_action_names][1:]
-    a_df.rename(columns=lambda x: x + '_extra', inplace=True)
-    a_df.reset_index(drop=True, inplace=True)
+ #   a_df = X_df[_target_column_action_names][1:]
+ #   a_df.rename(columns=lambda x: x + '_extra', inplace=True)
+ #   a_df.reset_index(drop=True, inplace=True)
 
     # We drop the last step of X since we do not have data
     # for a(t) at last timestep
     X_df = X_df.iloc[:-1]
     date = X_df.index.copy()
-    X_df.reset_index(drop=True, inplace=True)
+#    X_df.reset_index(drop=True, inplace=True)
     # We concatenate the actions back, shifted by one
-    X_df = pd.concat([X_df, a_df], axis=1)
+#    X_df = pd.concat([X_df, a_df], axis=1)
 
-    # Since in validatgion we will need to gradually give y to the 
+    # Since in validation we will need to gradually give y to the 
     # conditional regressor, we now have to add y in X. 
 
     extra_truth = ['y_' + obs for obs in _target_column_observation_names]
