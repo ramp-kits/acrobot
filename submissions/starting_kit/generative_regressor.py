@@ -17,13 +17,13 @@ class GenerativeRegressor(BaseEstimator):
 
     def fit(self, X_array, y_array):
         """Linear regression + residual sigma.
-        
+
         Parameters
         ----------
         X_array : pandas.DataFrame
             The input array. The features extracted by the feature extractor,
             plus `target_dim` system observables from time step t+1.
-        y_array : 
+        y_array :
             The ground truth array (system observables at time step t+1).
         """
         self.reg = LinearRegression()

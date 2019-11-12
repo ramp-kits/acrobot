@@ -1,21 +1,48 @@
 # RAMP starting kit on the Acrobot dataset
 
-Authors: Gabriel Hurtado & Balazs Kegl
+## Getting started
 
-[![Build Status](https://travis-ci.org/ramp-kits/boston_housing.svg?branch=master)](https://travis-ci.org/ramp-kits/boston_housing)
+The starting kit requires Python 3.7 and the following packages:
 
-Go to [`ramp-worflow`](https://github.com/paris-saclay-cds/ramp-workflow) for more help on the [RAMP](http:www.ramp.studio) ecosystem.
+- numpy
+- scipy
+- scikit-learn
+- pandas
+- xarray
+- jupyter
+- pytorch
+- altair
+- ramp-workflow (see below to install this package as you will need a specific version)
 
-Install ramp-workflow (rampwf), then execute
+Python 3.7 and all these packages (except [altair](https://altair-viz.github.io/getting_started/installation.html) and ramp-workflow) can be easily installed using the [Anaconda distribution](https://www.anaconda.com/distribution/).
 
+
+### ramp-workflow installation
+To install [ramp-workflow](https://github.com/paris-saclay-cds/ramp-workflow) please run the following command
 ```
-ramp_test_submission
+pip install git+https://github.com/paris-saclay-cds/ramp-workflow.git@generative_regression_clean
 ```
 
-to test the starting kit submission (`submissions/starting_kit`) and
-
+An alternative solution is to clone the [ramp-workflow repository](https://github.com/paris-saclay-cds/ramp-workflow) by running
 ```
-ramp_test_submission --submission random_forest_100
+git clone https://github.com/paris-saclay-cds/ramp-workflow.git
+```
+(you can use SSH instead of HTTPS).
+
+Then `cd` to the `ramp-workflow` folder and run
+```
+git checkout -b generative_regression_clean
+pip install .
 ```
 
-to test `random_forest_100` or any other submission in `submissions`.
+### Getting the starting kit
+
+To get the starting kit with the notebook and the submission examples clone the [acrobot repository](https://github.com/ramp-kits/acrobot).
+```
+git clone https://github.com/ramp-kits/acrobot
+```
+
+To run the notebook, `cd` to the `acrobot` folder and run
+```
+jupyter notebook acrobot_starting_kit.ipynb
+```

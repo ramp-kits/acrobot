@@ -59,8 +59,9 @@ def _read_data(path, X_name=None):
     X_df = X_df.iloc[:-1]
     date = X_df.index.copy()
 
-    # Since in validation we will need to gradually give y to the 
-    # conditional regressor, we now have to add y in X. 
+    # Since in validation we will need to gradually give y to the
+    # conditional regressor, we now have to add y in X.
+
     extra_truth = ['y_' + obs for obs in _target_column_observation_names]
     columns_X = list(X_df.columns)
 
