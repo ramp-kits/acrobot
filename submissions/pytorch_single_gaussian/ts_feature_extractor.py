@@ -4,14 +4,28 @@ import numpy as np
 
 class FeatureExtractor():
     def __init__(self, restart_name):
+        """
+        Parameters
+        ----------
+        restart_name : str
+            The name of the 0/1 column indicating restarts in the time series.
+        """
         self.restart_name = restart_name
         pass
 
     def transform(self, X_df_raw):
-        """
-        :param X_df_raw: The initial dataframe
-        :return: a dataframe with additional features (with no clashing names)
-                 bqsed on previous values' mean, being mindfull about restarts
+        """Transform time series into list of states.
+        We simply use the observables at time t as the state.
+        Be careful not to use any information from the future (X_ds[t + 1:])
+        when constructing X_df[t].
+        Parameters
+        ----------
+        X_ds : xarray.Dataset
+            The raw time series.
+        Return
+        ------
+        X_df : pandas Dataframe
+
         """
         X_df = X_df_raw.to_dataframe()
 
@@ -48,5 +62,8 @@ class FeatureExtractor():
         X_array = pd.concat([X_df, additional_dim], axis=1)
 
         X_array.set_index(date, inplace=True)
+
+        # We return a dataframe with additional features (with no clashing names)
+        # based on previous values' mean, being mindful about restarts
 
         return X_array
