@@ -15,17 +15,17 @@ class GenerativeRegressor(BaseEstimator):
         """
         pass
 
-    def fit(self, X, y):
+    def fit(self, X_df, y_array):
         """Linear regression + residual sigma."""
         self.reg = LinearRegression()
-        self.reg.fit(X, y)
-        y_pred = self.reg.predict(X)
+        self.reg.fit(X_df, y_array)
+        y_pred = self.reg.predict(X_df)
         y_pred = np.array([y_pred]).reshape(-1, 1)
-        residuals = y - y_pred
+        residuals = y_array - y_pred
         # Estimate a single sigma from residual variance
-        self.sigma = np.sqrt((1 / (X.shape[0] - 1)) * np.sum(residuals ** 2))
+        self.sigma = np.sqrt((1 / (X_df.shape[0] - 1)) * np.sum(residuals ** 2))
 
-    def predict(self, X):
+    def predict(self, X_df):
         """Construct a conditional mixture distribution.
         Return
         ------
@@ -37,12 +37,12 @@ class GenerativeRegressor(BaseEstimator):
         params : np.array of float tuples
             parameters for each component in the mixture
         """
-        types = np.array([[0], ] * len(X))
+        types = np.array([[0], ] * len(X_df))
 
         # Normal
-        y_pred = self.reg.predict(X)
-        sigmas = np.array([self.sigma] * len(X))
+        y_pred = self.reg.predict(X_df)
+        sigmas = np.array([self.sigma] * len(X_df))
         sigmas = sigmas[:, np.newaxis]
         params = np.concatenate((y_pred, sigmas), axis=1)
-        weights = np.array([[1.0], ] * len(X))
+        weights = np.array([[1.0], ] * len(X_df))
         return weights, types, params
