@@ -15,18 +15,38 @@ class GenerativeRegressor(BaseEstimator):
         """
         pass
 
-    def fit(self, X, y):
-        """Linear regression + residual sigma."""
+    def fit(self, X_array, y_array):
+        """Linear regression + residual sigma.
+        
+        Parameters
+        ----------
+        X_array : pandas.DataFrame
+            The input array. The features extracted by the feature extractor,
+            plus `target_dim` system observables from time step t+1.
+        y_array : 
+            The ground truth array (system observables at time step t+1).
+        """
         self.reg = LinearRegression()
-        self.reg.fit(X, y)
-        y_pred = self.reg.predict(X)
+        self.reg.fit(X_array, y_array)
+        y_pred = self.reg.predict(X_array)
         y_pred = np.array([y_pred]).reshape(-1, 1)
-        residuals = y - y_pred
+        residuals = y_array - y_pred
         # Estimate a single sigma from residual variance
-        self.sigma = np.sqrt((1 / (X.shape[0] - 1)) * np.sum(residuals ** 2))
+        self.sigma = np.sqrt(
+            (1 / (X_array.shape[0] - 1)) * np.sum(residuals ** 2))
 
-    def predict(self, X):
+    def predict(self, X_array):
         """Construct a conditional mixture distribution.
+
+        Be careful not to use any information from the future
+        (X_array[t + 1:]) when constructing the output.
+
+        Parameters
+        ----------
+        X_array : pandas.DataFrame
+            The input array. The features extracted by the feature extractor,
+            plus `target_dim` system observables from time step t+1.
+
         Return
         ------
         weights : np.array of float
@@ -37,12 +57,12 @@ class GenerativeRegressor(BaseEstimator):
         params : np.array of float tuples
             parameters for each component in the mixture
         """
-        types = np.array([[0], ] * len(X))
+        types = np.array([[0], ] * len(X_array))
 
         # Normal
-        y_pred = self.reg.predict(X)
-        sigmas = np.array([self.sigma] * len(X))
+        y_pred = self.reg.predict(X_array)
+        sigmas = np.array([self.sigma] * len(X_array))
         sigmas = sigmas[:, np.newaxis]
         params = np.concatenate((y_pred, sigmas), axis=1)
-        weights = np.array([[1.0], ] * len(X))
+        weights = np.array([[1.0], ] * len(X_array))
         return weights, types, params
