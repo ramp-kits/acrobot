@@ -1,4 +1,6 @@
-# Getting started
+# RAMP starting kit on the Acrobot dataset
+
+## Getting started
 
 The starting kit requires Python 3.7 and the following packages:
 
@@ -14,13 +16,13 @@ The starting kit requires Python 3.7 and the following packages:
 Python 3.7 and most of these packages can be installed using [Anaconda](https://www.anaconda.com/distribution/).
 
 
-## ramp-workflow installation
+### ramp-workflow installation
 To install [ramp-workflow](https://github.com/paris-saclay-cds/ramp-workflow) please run the following command
 ```
 pip install git+https://github.com/paris-saclay-cds/ramp-workflow.git@generative_regression_clean
 ```
 
-An alternative solution is to clone the [ramp-workflow repository](https://github.com/paris-saclay-cds/ramp-workflow)
+An alternative solution is to clone the [ramp-workflow repository](https://github.com/paris-saclay-cds/ramp-workflow) by running
 ```
 git clone https://github.com/paris-saclay-cds/ramp-workflow.git
 ```
@@ -32,7 +34,7 @@ git checkout -b generative_regression_clean
 pip install .
 ```
 
-## Getting the starting kit
+### Getting the starting kit
 
 To get the starting kit with the notebook and the submission examples clone the [acrobot repository](https://github.com/ramp-kits/acrobot).
 ```git clone https://github.com/ramp-kits/acrobot```.
