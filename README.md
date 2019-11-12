@@ -37,9 +37,11 @@ pip install .
 ### Getting the starting kit
 
 To get the starting kit with the notebook and the submission examples clone the [acrobot repository](https://github.com/ramp-kits/acrobot).
-```git clone https://github.com/ramp-kits/acrobot```.
+```
+git clone https://github.com/ramp-kits/acrobot
+```
 
 To run the notebook, `cd` to the `acrobot` folder and run
 ```
 jupyter notebook acrobot_starting_kit.ipynb
-```.
+```
