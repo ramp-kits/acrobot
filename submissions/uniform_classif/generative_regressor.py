@@ -22,6 +22,17 @@ class GenerativeRegressor(BaseEstimator):
         self.clf.fit(X, y.ravel())
 
     def predict(self, X):
+        """Construct a conditional mixture distribution.
+        Return
+        ------
+        weights : np.array of float
+            discrete probabilities of each component of the mixture
+        types : np.array of int
+            integer codes referring to component types
+            see rampwf.utils.distributions_dict
+        params : np.array of float tuples
+            parameters for each component in the mixture
+        """
 
         # Only uniform distributions
         # For the whole list of distributions, run
