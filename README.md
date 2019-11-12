@@ -11,14 +11,27 @@ The starting kit requires Python 3.7 and the following packages:
 - xarray
 - jupyter
 - pytorch
-- altair
+- matplotlib
+- altair (see below to install this package as you need to install specific dependencies)
 - ramp-workflow (see below to install this package as you will need a specific version)
 
 Python 3.7 and all these packages (except [altair](https://altair-viz.github.io/getting_started/installation.html) and ramp-workflow) can be easily installed using the [Anaconda distribution](https://www.anaconda.com/distribution/).
 
+### altair installation
+
+As we use altair in the starting kit notebook you need to install it with the required dependencies.
+This can be done using conda
+```
+conda install -c conda-forge altair vega_datasets notebook vega
+```
+or using pip
+```
+pip install -U altair vega_datasets notebook vega
+```
+You can refer to the [altair installation documentation](https://altair-viz.github.io/getting_started/installation.html#quick-start-altair-notebook) for more information.
 
 ### ramp-workflow installation
-To install [ramp-workflow](https://github.com/paris-saclay-cds/ramp-workflow) please run the following command
+For the purpose of this challenge we need to install a specific branch of [ramp-workflow](https://github.com/paris-saclay-cds/ramp-workflow). This can be done using pip
 ```
 pip install git+https://github.com/paris-saclay-cds/ramp-workflow.git@generative_regression_clean
 ```
@@ -27,9 +40,7 @@ An alternative solution is to clone the [ramp-workflow repository](https://githu
 ```
 git clone https://github.com/paris-saclay-cds/ramp-workflow.git
 ```
-(you can use SSH instead of HTTPS).
-
-Then `cd` to the `ramp-workflow` folder and run
+(you can use SSH instead of HTTPS). Then `cd` to the `ramp-workflow` folder and run
 ```
 git checkout -b generative_regression_clean
 pip install .
