@@ -11,7 +11,7 @@ _n_burn_in = 0  # number of guaranteed steps in time series history
 _max_dists = 100  # max number of kernels to use in generative regressors
 _target_column_observation_names = [
     'thetaDot2', 'cos(theta2)', 'sin(theta2)',
-    'thetaDot1', 'cos(theta1)', 'sin(theta1)', 
+    'thetaDot1', 'cos(theta1)', 'sin(theta1)',
 ]
 _target_column_action_names = ['action']
 _restart_names = ['restart']
@@ -66,8 +66,8 @@ def _read_data(path, X_name=None):
     # We concatenate the actions back, shifted by one
 #    X_df = pd.concat([X_df, a_df], axis=1)
 
-    # Since in validation we will need to gradually give y to the 
-    # conditional regressor, we now have to add y in X. 
+    # Since in validation we will need to gradually give y to the
+    # conditional regressor, we now have to add y in X.
 
     extra_truth = ['y_' + obs for obs in _target_column_observation_names]
     columns_X = list(X_df.columns)

@@ -15,7 +15,7 @@ pip install git+https://github.com/paris-saclay-cds/ramp-workflow.git@generative
 git clone https://github.com/ramp-kits/acrobot.git
 
 
--If youu need pytorch:
+-If you need pytorch:
 
 
 conda install pytorch
