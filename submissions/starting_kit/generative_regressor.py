@@ -61,7 +61,7 @@ class GenerativeRegressor(BaseEstimator):
 
         # Normal
         y_pred = self.reg.predict(X_array)
-        
+
         sigmas = np.array([self.sigma] * len(X_array))
         sigmas = sigmas[:, np.newaxis]
         params = np.concatenate((y_pred, sigmas), axis=1)
@@ -69,7 +69,7 @@ class GenerativeRegressor(BaseEstimator):
         sigmas = np.array([10 * self.sigma] * len(X_array))
         sigmas = sigmas[:, np.newaxis]
         params_safety = np.concatenate((y_pred, sigmas), axis=1)
-        
+
         params = np.concatenate((params, params_safety), axis=1)
         weights = np.array([[0.99, 0.01], ] * len(X_array))
         return weights, types, params

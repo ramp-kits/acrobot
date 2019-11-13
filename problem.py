@@ -11,7 +11,7 @@ _n_burn_in = 0  # number of guaranteed steps in time series history
 _max_dists = 100  # max number of kernels to use in generative regressors
 _target_column_observation_names = [
     'thetaDot2', 'theta2',
-    'thetaDot1', 'theta1', 
+    'thetaDot1', 'theta1',
 ]
 _target_column_action_names = ['action']
 _restart_names = ['restart']
@@ -53,7 +53,7 @@ def _read_data(path, X_name=None):
     y_df = X_df[_target_column_observation_names][1:]
     y_df.reset_index(drop=True, inplace=True)
 
- 
+
     # We drop the last step of X since we do not have data
     # for a(t) at last timestep
     X_df = X_df.iloc[:-1]
