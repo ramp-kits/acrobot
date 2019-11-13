@@ -46,6 +46,13 @@ git checkout -b generative_regression_clean
 pip install .
 ```
 
+### Using the requirement.txt file
+If you are using pip you can easily install all the required packages except pytorch with
+```
+pip install -r requirements.txt
+```
+To install pytorch you can follow the instructions available on the [pytorch website](https://pytorch.org/).
+
 ### Getting the starting kit
 
 To get the starting kit with the notebook and the submission examples clone the [acrobot repository](https://github.com/ramp-kits/acrobot).
