@@ -29,7 +29,6 @@ class GenerativeRegressor(BaseEstimator):
         self.reg = LinearRegression()
         self.reg.fit(X_array, y_array)
         y_pred = self.reg.predict(X_array)
-        y_pred = np.array([y_pred]).reshape(-1, 1)
         residuals = y_array - y_pred
         # Estimate a single sigma from residual variance
         self.sigma = np.sqrt(
