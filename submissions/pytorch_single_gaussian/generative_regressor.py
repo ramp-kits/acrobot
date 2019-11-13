@@ -6,8 +6,8 @@ from torch.autograd import Variable
 import torch.utils.data as data
 import torch.nn as nn
 
-num_epochs = 30
-batch = 50
+num_epochs = 20
+batch = 200
 
 # This pythorch submissions does not use a validation dataset, or any
 # sophisticated techniques. It is to be refined an improved. When done
@@ -58,7 +58,7 @@ class GenerativeRegressor(BaseEstimator):
         # We run our model over the whole training data to get an estimate
         # of sigma (in a batched fashion)
         num_data = X.shape[0]
-        num_batches = int(num_data / batch) + 1
+        num_batches = int(num_data / batch)
         yGuess = []
         for i in range(num_batches):
             batch_res = \
@@ -66,7 +66,7 @@ class GenerativeRegressor(BaseEstimator):
             yGuess += list(batch_res.detach().cpu().numpy().ravel())
 
         yGuess = np.array(yGuess).reshape(-1, 1)
-        error = y - yGuess
+        error = y[:len(yGuess)] - yGuess
 
         # Estimate a single sigma from residual variance
         self.sigma = np.sqrt((1 / X.shape[0]) * np.sum(error ** 2))
