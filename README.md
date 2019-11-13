@@ -46,7 +46,7 @@ git checkout -b generative_regression_clean
 pip install .
 ```
 
-### Using the requirement.txt file
+### Using the requirements.txt file
 If you are using pip you can easily install all the required packages except pytorch with
 ```
 pip install -r requirements.txt
