@@ -151,7 +151,7 @@ class SimpleBinnedNoBounds(nn.Module):
                      +---+
           +---+  +-> |   |-> mus
           |   |  |   +---+
-     X -> |   +--+     ↓
+     X -> |   +--+     |
           |   |  |   +---+
           +---+  +-> |   |-> sigmas
                      +---+
