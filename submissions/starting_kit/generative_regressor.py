@@ -17,13 +17,13 @@ class GenerativeRegressor(BaseEstimator):
 
     def fit(self, X_array, y_array):
         """Linear regression + residual sigma.
-        
+
         Parameters
         ----------
         X_array : pandas.DataFrame
             The input array. The features extracted by the feature extractor,
             plus `target_dim` system observables from time step t+1.
-        y_array : 
+        y_array :
             The ground truth array (system observables at time step t+1).
         """
         self.reg = LinearRegression()
@@ -57,12 +57,19 @@ class GenerativeRegressor(BaseEstimator):
         params : np.array of float tuples
             parameters for each component in the mixture
         """
-        types = np.array([[0], ] * len(X_array))
+        types = np.array([[0, 0], ] * len(X_array))
 
         # Normal
         y_pred = self.reg.predict(X_array)
+        
         sigmas = np.array([self.sigma] * len(X_array))
         sigmas = sigmas[:, np.newaxis]
         params = np.concatenate((y_pred, sigmas), axis=1)
-        weights = np.array([[1.0], ] * len(X_array))
+
+        sigmas = np.array([10 * self.sigma] * len(X_array))
+        sigmas = sigmas[:, np.newaxis]
+        params_safety = np.concatenate((y_pred, sigmas), axis=1)
+        
+        params = np.concatenate((params, params_safety), axis=1)
+        weights = np.array([[0.99, 0.01], ] * len(X_array))
         return weights, types, params
