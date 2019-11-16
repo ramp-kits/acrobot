@@ -45,6 +45,8 @@ def get_test_data(path='.'):
 
 def _read_data(path, X_name=None):
     X_df = pd.read_pickle(os.path.join(path, 'data', X_name))
+    X_df = X_df.astype({'restart': 'int64'})
+    to_drop = np.where(pd.isnull(X_df["action"]))[0]
     # reorder columns according to _target_column_observation_names
     X_df = X_df.reindex(
         columns=_target_column_observation_names +
@@ -73,6 +75,9 @@ def _read_data(path, X_name=None):
     X_df.set_axis(new_names, axis=1, inplace=True)
 
     X_df.set_index(date, inplace=True)
+    X_df.dropna(how='any', inplace=True)
+    y_df.drop(to_drop, inplace=True)
+    y_df.reset_index(drop=True, inplace=True)
     X_ds = xr.Dataset(X_df)
     X_ds.attrs['n_burn_in'] = _n_burn_in
     return X_ds, y_df.values
